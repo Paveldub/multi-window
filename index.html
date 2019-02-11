@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>multi window</title>
+</head>
+<body>
+    <button id="openWindow">Open Window</button>
+    
+    <script>
+        let openWindow = document.querySelector('#openWindow');
+
+        window.addEventListener('message', e => {
+            if (e.data.__loftschool) {
+                if (e.data.ready) {
+                    e.source.postMessage({
+                        __loftschool: true,
+                        // message: 'Hello, from parent'
+                    }, '*');
+                }
+            }
+        })
+
+        openWindow.addEventListener('click', e => {
+            window.open('window.html', '', 'width=300, height=300, top=100, left=100');
+        });
+    </script>
+</body>
+</html>
